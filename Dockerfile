@@ -16,6 +16,8 @@ COPY . /go/src/github.com/netlify/gotrue
 RUN make build
 
 FROM alpine:3.7
+RUN apk add --no-cache bash
+RUN apk --no-cache add curl
 RUN adduser -D -u 1000 netlify
 
 RUN apk add --no-cache ca-certificates

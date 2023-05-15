@@ -6,7 +6,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DATABASE="$DIR/database.yml"
 
 export GOTRUE_DB_DRIVER="mysql"
-export GOTRUE_DB_DATABASE_URL="root@tcp(127.0.0.1:3306)/gotrue_$DB_ENV?parseTime=true&multiStatements=true"
+export GOTRUE_DB_DATABASE_URL="root@tcp(db:3306)/gotrue_development"
 export GOTRUE_DB_MIGRATIONS_PATH=$DIR/../migrations
 
 echo soda -v

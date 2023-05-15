@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+  gotrue:
+    container_name: go
+    build: .
+    env_file: .env
+    depends_on:
+      - mariadb
+    ports:
+      - 9999:9999
+
+  mariadb:
+    container_name: db
+    image: mariadb
+    environment:
+        MYSQL_DATABASE: gotrue_development
+        MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+    restart: always
+    volumes:
+      - gotrue_mariadb_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+  
+  phpmyadmin:
+    container_name: admin
+    image: 'phpmyadmin/phpmyadmin'
+    restart: always
+    depends_on:
+      - mariadb
+    ports:
+      - '7000:80'
+      - '443:443'
+    environment: 
+      DATABASE_HOST: mariadb
+
+volumes:
+  gotrue_mariadb_data:
